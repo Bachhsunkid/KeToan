@@ -1,0 +1,8 @@
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\bin\Debug\test.exe.config
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\bin\Debug\test.exe
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\bin\Debug\test.pdb
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\obj\Debug\test.csproj.AssemblyReference.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\obj\Debug\test.csproj.SuggestedBindingRedirects.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\obj\Debug\test.exe
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\test\obj\Debug\test.pdb

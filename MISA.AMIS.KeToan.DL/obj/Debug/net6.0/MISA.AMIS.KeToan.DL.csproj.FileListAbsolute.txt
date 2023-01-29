@@ -1,0 +1,15 @@
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\bin\Debug\net6.0\MISA.AMIS.KeToan.DL.deps.json
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\bin\Debug\net6.0\MISA.AMIS.KeToan.DL.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\bin\Debug\net6.0\MISA.AMIS.KeToan.DL.pdb
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\bin\Debug\net6.0\MISA.AMIS.KeToan.Common.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\bin\Debug\net6.0\MISA.AMIS.KeToan.Common.pdb
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.csproj.AssemblyReference.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.GeneratedMSBuildEditorConfig.editorconfig
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.AssemblyInfoInputs.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.AssemblyInfo.cs
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.csproj.CoreCompileInputs.cache
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.csproj.CopyComplete
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\refint\MISA.AMIS.KeToan.DL.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\MISA.AMIS.KeToan.DL.pdb
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.DL\obj\Debug\net6.0\ref\MISA.AMIS.KeToan.DL.dll
