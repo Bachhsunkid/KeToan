@@ -19,7 +19,7 @@ namespace MISA.AMIS.KeToan.Common.Entities
 
         public EmployeeInserted(Guid employeeID, int numberRowsAffected)
         {
-            _EmployeeID = employeeID;
+            _NewEmployeeID = employeeID;
             _NumberRowsAffected = numberRowsAffected;
         } 
         #endregion

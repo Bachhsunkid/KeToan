@@ -75,12 +75,12 @@ namespace MISA.AMIS.KeToan.DL
             var props = record.GetType().GetProperties();
 
             parameters.Add($"v_{typeof(T).Name}ID", newRecordID); //Add ID bằng GUID mới
-            //parameters.Add($"v_{typeof(T).Name}Code", newRecordCode()); // Add code bằng mã code lớn hơn mã code lớn nhất hiện thời 1 đơn vị
+            parameters.Add($"v_{typeof(T).Name}Code", newRecordCode()); // Add code bằng mã code lớn hơn mã code lớn nhất hiện thời 1 đơn vị
 
-            for (int i = 0; i < props.Length; i++)
+            for (int i = 2; i < props.Length; i++)
             {
                 var value = props[i].GetValue(record);
-                parameters.Add($"@v{props[i].Name}", value);
+                parameters.Add($"@v_{props[i].Name}", value);
             }
 
             //Thực hiện gọi vào DB
@@ -112,11 +112,12 @@ namespace MISA.AMIS.KeToan.DL
             var parameters = new DynamicParameters();
             var props = record.GetType().GetProperties();
 
+            parameters.Add($"v_{typeof(T).Name}ID", recordID); //Add ID bằng GUID truyền vào
 
-            for (int i = 0; i < props.Length; i++)
+            for (int i = 2; i < props.Length; i++)
             {
                 var value = props[i].GetValue(record);
-                parameters.Add($"@v{props[i].Name}", value);
+                parameters.Add($"@v_{props[i].Name}", value);
             }
 
             //Thực hiện gọi vào DB
@@ -146,7 +147,7 @@ namespace MISA.AMIS.KeToan.DL
 
             //Chuẩn bị tham số đầu vào
             var parameters = new DynamicParameters();
-            parameters.Add("v_{typeof(T).Name}ID", recordID);
+            parameters.Add($"v_{typeof(T).Name}ID", recordID);
 
             //Thực hiện gọi vào DB
             var employee = mySqlConnection.Execute(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);

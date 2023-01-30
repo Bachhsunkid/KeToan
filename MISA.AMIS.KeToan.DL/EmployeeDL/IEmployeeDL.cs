@@ -1,5 +1,5 @@
 ﻿using MISA.AMIS.KeToan.Common.Entities;
-using MISA.AMIS.KeToan.DL.BaseDL;
+using MISA.AMIS.KeToan.DL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

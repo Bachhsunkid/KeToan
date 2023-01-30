@@ -93,9 +93,9 @@ namespace MISA.AMIS.KeToan.API.Controllers
         }
 
         /// <summary>
-        /// Them moi 1 nhan vien
+        /// Them moi 1 ban ghi
         /// </summary>
-        /// <param name="employee"></param>
+        /// <param name="record"></param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult InsertRecord([FromBody] T record)
