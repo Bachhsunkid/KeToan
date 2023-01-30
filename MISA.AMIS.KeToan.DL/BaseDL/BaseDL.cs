@@ -1,14 +1,14 @@
 ﻿using Dapper;
 using MISA.AMIS.KeToan.Common.Constants;
-using MISA.AMIS.KeToan.Common.Entities;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
-namespace MISA.AMIS.KeToan.DL.BaseDL
+namespace MISA.AMIS.KeToan.DL
 {
     public class BaseDL<T> : IBaseDL<T>
     {
@@ -64,7 +64,33 @@ namespace MISA.AMIS.KeToan.DL.BaseDL
         /// Create by: TXBACH 17/02/2023
         public Guid InsertRecord(T record)
         {
-            throw new NotImplementedException();
+            //Khởi tạo kết nối đến DB
+            var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
+
+            //Chuẩn bị câu lệnh sql
+            string storedProcedureName = $"Proc_{typeof(T).Name}_InsertOne";
+
+            var parameters = new DynamicParameters();
+            Guid newRecordID = Guid.NewGuid();
+            var props = record.GetType().GetProperties();
+
+            parameters.Add($"v_{typeof(T).Name}ID", newRecordID); //Add ID bằng GUID mới
+            //parameters.Add($"v_{typeof(T).Name}Code", newRecordCode()); // Add code bằng mã code lớn hơn mã code lớn nhất hiện thời 1 đơn vị
+
+            for (int i = 0; i < props.Length; i++)
+            {
+                var value = props[i].GetValue(record);
+                parameters.Add($"@v{props[i].Name}", value);
+            }
+
+            //Thực hiện gọi vào DB
+            int numberRowsAffected = mySqlConnection.Execute(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+            if (numberRowsAffected > 0)
+            {
+                return newRecordID;
+            }
+            return Guid.Empty;
         }
         
 
@@ -77,7 +103,30 @@ namespace MISA.AMIS.KeToan.DL.BaseDL
         /// Create by: TXBACH 17/02/2023
         public Guid UpdateRecord(Guid recordID, T record)
         {
-            throw new NotImplementedException();
+            //Khởi tạo kết nối đến DB
+            var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
+
+            //Chuẩn bị câu lệnh sql
+            string storedProcedureName = $"Proc_{typeof(T).Name}_UpdateOne";
+
+            var parameters = new DynamicParameters();
+            var props = record.GetType().GetProperties();
+
+
+            for (int i = 0; i < props.Length; i++)
+            {
+                var value = props[i].GetValue(record);
+                parameters.Add($"@v{props[i].Name}", value);
+            }
+
+            //Thực hiện gọi vào DB
+            int numberRowsAffected = mySqlConnection.Execute(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+            if (numberRowsAffected > 0)
+            {
+                return recordID;
+            }
+            return Guid.Empty;
         }
         
 
@@ -89,8 +138,41 @@ namespace MISA.AMIS.KeToan.DL.BaseDL
         /// Create by: TXBACH 17/02/2023
         public Guid DeleteRecord(Guid recordID)
         {
-            throw new NotImplementedException();
+            //Khởi tạo kết nối với DB Mysql
+            var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
+
+            //Chuẩn bị câu lệnh sql
+            string storedProcedureName = $"Proc_{typeof(T).Name}_DeleteOne";
+
+            //Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add("v_{typeof(T).Name}ID", recordID);
+
+            //Thực hiện gọi vào DB
+            var employee = mySqlConnection.Execute(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+            if (employee > 0)
+            {
+                return recordID;
+            }
+            return Guid.Empty;
         }
-        
+
+        /// <summary>
+        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
+        /// </summary>
+        /// <returns></returns>
+        public string newRecordCode()
+        {
+            string query = $"select {typeof(T).Name}Code from {typeof(T).Name} order by {typeof(T).Name}Code desc";
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                var code = mySqlConnection.QueryFirstOrDefault<string>(query, null);
+                int number = 0;
+                if (!string.IsNullOrEmpty(code))
+                    number = Int32.Parse(($"{code}").Substring(2)) + 1;
+                return "NV" + number;
+            }
+        }
     }
 }

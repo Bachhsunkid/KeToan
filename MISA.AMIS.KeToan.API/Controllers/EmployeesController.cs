@@ -13,89 +13,19 @@ using MySqlConnector;
 
 namespace MISA.AMIS.KeToan.API.Controllers
 {
-    [Route("api/v1/[controller]")] // "Users" sẽ được mapping với "[controller]"
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : BaseController<Employee>
     {
         #region Field
         private IEmployeeBL _employeeBL;
         #endregion
 
         #region Constructor
-        public EmployeesController(IEmployeeBL employeeBL)
+        public EmployeesController(IEmployeeBL employeeBL) : base(employeeBL)
         {
             _employeeBL = employeeBL;
         }
         #endregion
-
-        /// <summary>
-        /// API lay danh sach tat ca nhan vien
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult GetAllEmployees()
-        {
-            try
-            {
-                var employees = _employeeBL.GetAllEmployees();
-
-                //Xử lí kết quả trả về
-                if (employees != null)
-                {
-                    return StatusCode(StatusCodes.Status200OK, employees);
-                }
-
-                return StatusCode(StatusCodes.Status200OK, new List<Employee>());
-            }
-            //Try catch Exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = AMISKeToanErrorCode.Exception,
-                    DevMsg = Resource.DevMsg_Exception,
-                    UserMsg = Resource.UserMsg_Exception,
-                    MoreInfo = Resource.MoreInfor_Exception,
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-
-        }
-
-        /// <summary>
-        /// Lay thong tin 1 nhan vien theo id
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("{employeeID}")]
-        public IActionResult GetEmployeeByID([FromRoute] Guid employeeID)
-        {
-            try
-            {
-                var employee = _employeeBL.GetEmployeeByID(employeeID);
-
-                //Xử lí kết quả trả về
-                if (employee != null)
-                {
-                    return StatusCode(StatusCodes.Status200OK, employee);
-                }
-
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-            //Try catch Exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = AMISKeToanErrorCode.Exception,
-                    DevMsg = Resource.DevMsg_Exception,
-                    UserMsg = Resource.UserMsg_Exception,
-                    MoreInfo = Resource.MoreInfor_Exception,
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-        }
 
         /// <summary>
         /// API lấy danh sách nhân viên theo bộ lọc và phân trang
@@ -142,129 +72,6 @@ namespace MISA.AMIS.KeToan.API.Controllers
         }
 
         /// <summary>
-        /// Them moi 1 nhan vien
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult InsertEmployee([FromBody] Employee employee)
-        {
-            try
-            {
-                var employeeInserted = _employeeBL.InsertEmployee(employee);
-
-                //Xử lý kết quả trả về
-                if (employeeInserted != Guid.Empty)
-                {
-                    return StatusCode(StatusCodes.Status201Created, employeeInserted);
-                }
-
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = 2,
-                    DevMsg = "Database insert fail.",
-                    UserMsg = "Thêm mới nhân viên thất bại.",
-                    MoreInfo = "https://openapi.misa.com.vn/errorcode/2",
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-            //Try catch Exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = AMISKeToanErrorCode.Exception,
-                    DevMsg = Resource.DevMsg_Exception,
-                    UserMsg = Resource.UserMsg_Exception,
-                    MoreInfo = Resource.MoreInfor_Exception,
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-        }
-
-        /// <summary>
-        /// Sua thong tin 1 nhan vien
-        /// </summary>
-        /// <param name="employeeID"></param>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        [HttpPut("{employeeID}")]
-        public IActionResult UpdateEmployee(
-            [FromRoute] Guid employeeID,
-            [FromBody] Employee employee
-            )
-        {
-            try
-            {
-                var employeeEditedID = _employeeBL.UpdateEmployee(employeeID, employee);
-
-                //Xử lý kết quả trả về
-                if (employeeEditedID != Guid.Empty)
-                {
-                    return StatusCode(StatusCodes.Status201Created, employeeEditedID);
-                }
-
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = 2,
-                    DevMsg = "Database update fail.",
-                    UserMsg = "Sửa thông tin nhân viên thất bại.",
-                    MoreInfo = "https://openapi.misa.com.vn/errorcode/2",
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-            //Try catch Exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = AMISKeToanErrorCode.Exception,
-                    DevMsg = Resource.DevMsg_Exception,
-                    UserMsg = Resource.UserMsg_Exception,
-                    MoreInfo = Resource.MoreInfor_Exception,
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-        }
-        
-        /// <summary>
-        /// Xóa 1 nhân viên
-        /// </summary>
-        /// <param name="employeeID"></param>
-        /// <returns></returns>
-        [HttpDelete("{employeeID}")]
-        public IActionResult DeleteEmployee([FromRoute] Guid employeeID)
-        {
-            try
-            {
-                var employeeDeletedID = _employeeBL.DeleteEmployee(employeeID);
-
-                //Xử lí kết quả trả về
-                if (employeeDeletedID != Guid.Empty)
-                {
-                    return StatusCode(StatusCodes.Status200OK, employeeDeletedID);
-                }
-
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-            //Try catch Exception
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    ErrorCode = AMISKeToanErrorCode.Exception,
-                    DevMsg = Resource.DevMsg_Exception,
-                    UserMsg = Resource.UserMsg_Exception,
-                    MoreInfo = Resource.MoreInfor_Exception,
-                    TraceId = HttpContext.TraceIdentifier
-                });
-            }
-        }     
-
-        /// <summary>
         /// Xoa nhieu nhan vien
         /// </summary>
         /// <param name="listEmployee"></param>
@@ -299,20 +106,5 @@ namespace MISA.AMIS.KeToan.API.Controllers
                 });
             }
         }
-
-
-        //public string newEmployeeCode()
-        //{
-        //    string query = "select EmployeeCode from Employee e order by e.EmployeeCode desc";
-        //    using (conn = new MySqlConnection(connString))
-        //    {
-        //        var code = conn.QueryFirstOrDefault<string>(query, null);
-        //        int number = 1;
-        //        if (!string.IsNullOrEmpty(code))
-        //            number = Int32.Parse(($"{code}").Substring(2)) + 1;
-        //        return "NV" + number;
-        //    }
-        //}
-
     }
 }

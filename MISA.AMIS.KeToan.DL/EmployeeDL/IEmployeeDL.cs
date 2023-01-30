@@ -1,4 +1,5 @@
 ﻿using MISA.AMIS.KeToan.Common.Entities;
+using MISA.AMIS.KeToan.DL.BaseDL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +8,8 @@ using System.Threading.Tasks;
 
 namespace MISA.AMIS.KeToan.DL
 {
-    public interface IEmployeeDL
+    public interface IEmployeeDL : IBaseDL<Employee>
     {
-        /// <summary>
-        /// Lấy tất cả danh sách nhân viên
-        /// </summary>
-        /// <returns>Danh sách tất cả nhân viên</returns>
-        /// Create by: TXBACH 17/02/2023
-        public IEnumerable<dynamic> GetAllEmployees();
-
-        /// <summary>
-        /// Lấy thông tin 1 nhân viên theo ID
-        /// </summary>
-        /// <returns>Thông tin 1 nhân viên theo ID</returns>
-        /// Create by: TXBACH 17/02/2023
-        public Employee GetEmployeeByID(Guid employeeID);
-
         /// <summary>
         /// API lấy danh sách nhân viên theo bộ lọc và phân trang
         /// </summary>
@@ -33,32 +20,6 @@ namespace MISA.AMIS.KeToan.DL
             int limit = 10,
             int offset = 0
         );
-
-        /// <summary>
-        /// Them moi 1 nhan vien
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        /// Create by: TXBACH 17/02/2023
-        public Guid InsertEmployee(Employee employee);
-
-
-        /// <summary>
-        /// Sua thong tin 1 nhan vien
-        /// </summary>
-        /// <param name="employeeID"></param>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        /// Create by: TXBACH 17/02/2023
-        public Guid UpdateEmployee(Guid employeeID, Employee employee);
-
-        /// <summary>
-        /// Xóa 1 nhân viên
-        /// </summary>
-        /// <param name="employeeID"></param>
-        /// <returns></returns>
-        /// Create by: TXBACH 17/02/2023
-        public Guid DeleteEmployee(Guid employeeID);
 
         /// <summary>
         /// Xoa nhieu nhan vien
