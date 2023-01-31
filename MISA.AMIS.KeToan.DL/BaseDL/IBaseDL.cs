@@ -14,7 +14,14 @@ namespace MISA.AMIS.KeToan.DL
         /// </summary>
         /// <returns>Danh sách tất cả bản ghi</returns>
         /// Create by: TXBACH 17/02/2023
-        public IEnumerable<T> GetAllRecords();
+        public IEnumerable<T> GetAllRecords(string? keyword);
+
+        /// <summary>
+        /// Lấy tất cả danh sách bản ghi
+        /// </summary>
+        /// <returns>Danh sách tất cả bản ghi</returns>
+        /// Create by: TXBACH 17/02/2023
+        public IEnumerable<T> GetRecordsByKeyword(string keyword);
 
         /// <summary>
         /// Lấy thông tin 1 bản ghi theo ID

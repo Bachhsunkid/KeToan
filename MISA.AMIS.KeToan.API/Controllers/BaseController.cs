@@ -13,7 +13,6 @@ namespace MISA.AMIS.KeToan.API.Controllers
     {
         #region Field
         private IBaseBL<T> _baseBL;
-        private IEmployeeBL employeeBL;
         #endregion
 
         #region Constructor
@@ -28,11 +27,11 @@ namespace MISA.AMIS.KeToan.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetAllRecords()
+        public IActionResult GetAllRecords([FromQuery] string? keyword)
         {
             try
             {
-                var records = _baseBL.GetAllRecords();
+                var records = _baseBL.GetAllRecords(keyword);
 
                 //Xử lí kết quả trả về
                 if (records != null)
@@ -55,8 +54,37 @@ namespace MISA.AMIS.KeToan.API.Controllers
                     TraceId = HttpContext.TraceIdentifier
                 });
             }
-
         }
+
+        //[HttpGet]
+        //public IActionResult GetRecordsByKeyword([FromQuery] string? keyword)
+        //{
+        //    try
+        //    {
+        //        var records = _baseBL.GetRecordsByKeyword(keyword);
+
+        //        //Xử lí kết quả trả về
+        //        if (records != null)
+        //        {
+        //            return StatusCode(StatusCodes.Status200OK, records);
+        //        }
+
+        //        return StatusCode(StatusCodes.Status200OK, new List<T>());
+        //    }
+        //    //Try catch Exception
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //        return StatusCode(StatusCodes.Status500InternalServerError, new
+        //        {
+        //            ErrorCode = AMISKeToanErrorCode.Exception,
+        //            DevMsg = Resource.DevMsg_Exception,
+        //            UserMsg = Resource.UserMsg_Exception,
+        //            MoreInfo = Resource.MoreInfor_Exception,
+        //            TraceId = HttpContext.TraceIdentifier
+        //        });
+        //    }
+        //}
 
         /// <summary>
         /// Lay thong tin 1 bản ghi theo id

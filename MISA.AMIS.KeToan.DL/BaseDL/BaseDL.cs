@@ -17,7 +17,7 @@ namespace MISA.AMIS.KeToan.DL
         /// </summary>
         /// <returns>Danh sách tất cả bản ghi</returns>
         /// Create by: TXBACH 17/02/2023
-        public IEnumerable<T> GetAllRecords()
+        public IEnumerable<T> GetAllRecords(string? keyword)
         {
             //Khởi tạo kết nối với DB Mysql
             var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
@@ -25,11 +25,46 @@ namespace MISA.AMIS.KeToan.DL
             //Chuẩn bị câu lệnh sql
             string storedProcedureName = String.Format(Procedure.GET_ALL, typeof(T).Name);
 
+            if(keyword == null)
+            {
+                keyword = "";
+            }
+
+            //Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add($"v_{typeof(T).Name}Name", keyword);
+
             //Thực hiện gọi vào DB
-            var records = mySqlConnection.Query<T>(storedProcedureName, commandType: System.Data.CommandType.StoredProcedure);
+            var records = mySqlConnection.Query<T>(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
 
             //Xử lí kết quả trả về
             return records;
+
+
+            
+        }
+
+        /// <summary>
+        /// Lấy tất cả danh sách bản ghi
+        /// </summary>
+        /// <returns>Danh sách tất cả bản ghi</returns>
+        /// Create by: TXBACH 17/02/2023
+        public IEnumerable<T> GetRecordsByKeyword(string keyword)
+        {
+            //Khởi tạo kết nối với DB Mysql
+            var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
+
+            //Chuẩn bị câu lệnh sql
+            string storedProcedureName = $"Proc_{typeof(T).Name}_GetByKeyword";
+
+            //Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add($"v_{typeof(T).Name}Name", keyword);
+
+            //Thực hiện gọi vào DB
+            var result = mySqlConnection.Query<T>(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+            return result;
         }
 
         /// <summary>
@@ -55,7 +90,6 @@ namespace MISA.AMIS.KeToan.DL
             return result;
         }
         
-
         /// <summary>
         /// Them moi 1 bản ghi
         /// </summary>
@@ -142,7 +176,7 @@ namespace MISA.AMIS.KeToan.DL
             //Khởi tạo kết nối với DB Mysql
             var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
 
-            //Chuẩn bị câu lệnh sql
+            //Chuẩn bị câu lệnh sql 
             string storedProcedureName = $"Proc_{typeof(T).Name}_DeleteOne";
 
             //Chuẩn bị tham số đầu vào

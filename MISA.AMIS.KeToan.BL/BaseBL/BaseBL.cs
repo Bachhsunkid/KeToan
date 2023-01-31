@@ -25,9 +25,19 @@ namespace MISA.AMIS.KeToan.BL
         /// </summary>
         /// <returns>Danh sách tất cả bản ghi</returns>
         /// Create by: TXBACH 17/02/2023
-        public IEnumerable<T> GetAllRecords()
+        public IEnumerable<T> GetAllRecords(string? keyword)
         {
-            return _baseDL.GetAllRecords();
+            return _baseDL.GetAllRecords(keyword);
+        }
+
+        /// <summary>
+        /// Lấy tất cả danh sách bản ghi
+        /// </summary>
+        /// <returns>Danh sách tất cả bản ghi</returns>
+        /// Create by: TXBACH 17/02/2023
+        public IEnumerable<T> GetRecordsByKeyword(string keyword)
+        {
+            return _baseDL.GetRecordsByKeyword(keyword);
         }
 
         /// <summary>
