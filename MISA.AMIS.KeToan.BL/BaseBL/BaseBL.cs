@@ -83,5 +83,10 @@ namespace MISA.AMIS.KeToan.BL
         {
             return _baseDL.DeleteRecord(recordID);
         }
+
+        public Guid ConvertCodeToID(string employeeCode)
+        {
+            return _baseDL.ConvertCodeToID(employeeCode);
+        }
     }
 }

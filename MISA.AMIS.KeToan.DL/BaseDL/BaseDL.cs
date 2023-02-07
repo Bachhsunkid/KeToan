@@ -209,5 +209,23 @@ namespace MISA.AMIS.KeToan.DL
                 return "NV" + number;
             }
         }
+
+        public Guid ConvertCodeToID(string employeeCode)
+        {
+            //Khởi tạo kết nối với DB Mysql
+            var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString);
+
+            //Chuẩn bị câu lệnh sql
+            string storedProcedureName = $"Proc_{typeof(T).Name}_CodeToID";
+
+            //Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add($"v_{typeof(T).Name}Code", employeeCode);
+
+            //Thực hiện gọi vào DB
+            var result = mySqlConnection.QueryFirstOrDefault(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure).employeeID;
+
+            return result;
+        }
     }
 }

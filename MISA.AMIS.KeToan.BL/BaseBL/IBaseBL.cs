@@ -54,5 +54,7 @@ namespace MISA.AMIS.KeToan.BL
         /// <returns></returns>
         /// Create by: TXBACH 17/02/2023
         public Guid DeleteRecord(Guid recordID);
+
+        public Guid ConvertCodeToID(string employeeCode);
     }
 }

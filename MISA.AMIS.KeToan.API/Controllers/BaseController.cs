@@ -56,35 +56,35 @@ namespace MISA.AMIS.KeToan.API.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult GetRecordsByKeyword([FromQuery] string? keyword)
-        //{
-        //    try
-        //    {
-        //        var records = _baseBL.GetRecordsByKeyword(keyword);
+        [HttpGet("convert/{recordCode}")]
+        public IActionResult GetRecordsByKeyword([FromRoute] string recordCode)
+        {
+            try
+            {
+                var records = _baseBL.ConvertCodeToID(recordCode);
 
-        //        //Xử lí kết quả trả về
-        //        if (records != null)
-        //        {
-        //            return StatusCode(StatusCodes.Status200OK, records);
-        //        }
+                //Xử lí kết quả trả về
+                if (records != Guid.Empty)
+                {
+                    return StatusCode(StatusCodes.Status200OK, records);
+                }
 
-        //        return StatusCode(StatusCodes.Status200OK, new List<T>());
-        //    }
-        //    //Try catch Exception
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //        return StatusCode(StatusCodes.Status500InternalServerError, new
-        //        {
-        //            ErrorCode = AMISKeToanErrorCode.Exception,
-        //            DevMsg = Resource.DevMsg_Exception,
-        //            UserMsg = Resource.UserMsg_Exception,
-        //            MoreInfo = Resource.MoreInfor_Exception,
-        //            TraceId = HttpContext.TraceIdentifier
-        //        });
-        //    }
-        //}
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
+            //Try catch Exception
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    ErrorCode = AMISKeToanErrorCode.Exception,
+                    DevMsg = Resource.DevMsg_Exception,
+                    UserMsg = Resource.UserMsg_Exception,
+                    MoreInfo = Resource.MoreInfor_Exception,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
 
         /// <summary>
         /// Lay thong tin 1 bản ghi theo id
