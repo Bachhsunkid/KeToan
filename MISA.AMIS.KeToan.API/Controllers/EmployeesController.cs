@@ -28,6 +28,41 @@ namespace MISA.AMIS.KeToan.API.Controllers
         #endregion
 
         /// <summary>
+        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        [HttpGet("NewEmployeeCode")]
+        public IActionResult GetNewEmployeeCode()
+        {
+            try
+            {
+                var newEmployeeCode = _employeeBL.GetNewEmployeeCode();
+
+                //Xử lí kết quả trả về //Opps: dung employee > 0 trả về errorcode 500 dù DB đã chạy đúng
+                if (newEmployeeCode != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, newEmployeeCode);
+                }
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            //Try catch Exception
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    ErrorCode = AMISKeToanErrorCode.Exception,
+                    DevMsg = Resource.DevMsg_Exception,
+                    UserMsg = Resource.UserMsg_Exception,
+                    MoreInfo = Resource.MoreInfor_Exception,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        /// <summary>
         /// API lấy danh sách nhân viên theo bộ lọc và phân trang
         /// </summary>
         /// <param name="keyword">Từ khóa muốn tìm kiếm</param>
@@ -79,13 +114,12 @@ namespace MISA.AMIS.KeToan.API.Controllers
         [HttpDelete("DeleteBatch")]
         public IActionResult DeleteMultipleEmployees([FromBody] ListEmployeeID listEmployee)
         {
-
             try
             {
                 var listEmployeeIDs = _employeeBL.DeleteMultipleEmployees(listEmployee);
 
                 //Xử lí kết quả trả về //Opps: dung employee > 0 trả về errorcode 500 dù DB đã chạy đúng
-                if (listEmployeeIDs.EmployeeIDs.Count > 0)
+                if (listEmployee.EmployeeIDs != null)
                 {
                     return StatusCode(StatusCodes.Status200OK, listEmployeeIDs.EmployeeIDs);
                 }

@@ -27,5 +27,12 @@ namespace MISA.AMIS.KeToan.DL
         /// <param name="listEmployee"></param>
         /// <returns></returns>
         public ListEmployeeID DeleteMultipleEmployees(ListEmployeeID listEmployee);
+
+        /// <summary>
+        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        public string GetNewEmployeeCode();
     }
 }

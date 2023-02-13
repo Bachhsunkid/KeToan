@@ -5,7 +5,7 @@ using MISA.AMIS.KeToan.Common.Entities;
 
 namespace MISA.AMIS.KeToan.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DepartmentController : BaseController<Department>
     {

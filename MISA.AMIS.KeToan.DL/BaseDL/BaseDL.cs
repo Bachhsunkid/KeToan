@@ -109,9 +109,9 @@ namespace MISA.AMIS.KeToan.DL
             var props = record.GetType().GetProperties();
 
             parameters.Add($"v_{typeof(T).Name}ID", newRecordID); //Add ID bằng GUID mới
-            parameters.Add($"v_{typeof(T).Name}Code", newRecordCode()); // Add code bằng mã code lớn hơn mã code lớn nhất hiện thời 1 đơn vị
+            //parameters.Add($"v_{typeof(T).Name}Code", newRecordCode()); // Add code bằng mã code lớn hơn mã code lớn nhất hiện thời 1 đơn vị
 
-            for (int i = 2; i < props.Length; i++)
+            for (int i = 1; i < props.Length; i++)
             {
                 var value = props[i].GetValue(record);
                 parameters.Add($"@v_{props[i].Name}", value);
@@ -150,6 +150,10 @@ namespace MISA.AMIS.KeToan.DL
 
             for (int i = 2; i < props.Length; i++)
             {
+                if (props[i].Name == "CreatedBy")
+                {
+                    continue;
+                }
                 var value = props[i].GetValue(record);
                 parameters.Add($"@v_{props[i].Name}", value);
             }
@@ -191,23 +195,6 @@ namespace MISA.AMIS.KeToan.DL
                 return recordID;
             }
             return Guid.Empty;
-        }
-
-        /// <summary>
-        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
-        /// </summary>
-        /// <returns></returns>
-        public string newRecordCode()
-        {
-            string query = $"select {typeof(T).Name}Code from {typeof(T).Name} order by {typeof(T).Name}Code desc";
-            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
-            {
-                var code = mySqlConnection.QueryFirstOrDefault<string>(query, null);
-                int number = 0;
-                if (!string.IsNullOrEmpty(code))
-                    number = Int32.Parse(($"{code}").Substring(2)) + 1;
-                return "NV" + number;
-            }
         }
 
         public Guid ConvertCodeToID(string employeeCode)

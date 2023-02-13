@@ -40,5 +40,14 @@ namespace MISA.AMIS.KeToan.BL
         {
             return _employeeDL.DeleteMultipleEmployees(listEmployee);
         }
+        /// <summary>
+        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        public string GetNewEmployeeCode()
+        {
+            return _employeeDL.GetNewEmployeeCode();
+        }
     }
 }

@@ -73,5 +73,24 @@ namespace MISA.AMIS.KeToan.DL
             }
             return new ListEmployeeID();
         }
+
+
+        /// <summary>
+        /// Tạo mã code lớn hơn 1 so với hiện tại (để không lặp)
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        public string GetNewEmployeeCode()
+        {
+            string query = $"select EmployeeCode from Employee order by EmployeeCode desc";
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                var code = mySqlConnection.QueryFirstOrDefault<string>(query, null);
+                int number = 0;
+                if (!string.IsNullOrEmpty(code))
+                    number = Int32.Parse(($"{code}").Substring(2)) + 1;
+                return "NV" + number;
+            }
+        }
     }
 }

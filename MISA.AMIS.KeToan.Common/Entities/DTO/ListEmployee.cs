@@ -2,6 +2,6 @@
 {
     public class ListEmployeeID
     {
-        public List<Guid> EmployeeIDs { get; set; }
+        public List<string> EmployeeIDs { get; set; }
     }
 }

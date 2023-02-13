@@ -25,6 +25,11 @@ namespace MISA.AMIS.KeToan.Common.Entities
         public Guid DepartmentID { get; set; }
 
         /// <summary>
+        /// Tên phòng ban
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
         /// Chức vụ
         /// </summary>
         public string PositionName { get; set; }
@@ -97,7 +102,7 @@ namespace MISA.AMIS.KeToan.Common.Entities
         /// <summary>
         /// Người tạo
         /// </summary>
-        public string CreatedBy { get; set; }
+        public string? CreatedBy { get; set; }
 
         /// <summary>
         /// Ngày tạo
