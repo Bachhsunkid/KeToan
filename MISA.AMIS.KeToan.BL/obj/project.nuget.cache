@@ -1,11 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "UAuKakpD1/5h309ffqrrmbhfA+5ED9qYdO9vvJ+LZu/lolencfGULw+duHIlhq0rfs4PEbXSAnKOVkKzEnFE5Q==",
+  "dgSpecHash": "gWXP68CsR3pqghfEnflClGmrddrl/nGq1yjNxfJ5uBXJBdJtmQ+N9KVdUiflN6ZIj2si+wtIRc6n+pFgyFAyvw==",
   "success": true,
   "projectFilePath": "D:\\UTC di hoc\\ki6\\lap-trinh-api-6-4-mien-thi\\MISA.AMIS.KeToan.API\\MISA.AMIS.KeToan.BL\\MISA.AMIS.KeToan.BL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\ADMIN\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+    "C:\\Users\\ADMIN\\.nuget\\packages\\mailkit\\3.5.0\\mailkit.3.5.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\mimekit\\3.5.0\\mimekit.3.5.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

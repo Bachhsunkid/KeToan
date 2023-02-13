@@ -33,3 +33,8 @@ D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeTo
 D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\MISA.AMIS.KeToan.BL.pdb
 D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\MISA.AMIS.KeToan.Common.pdb
 D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\MISA.AMIS.KeToan.DL.pdb
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\MailKit.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\MimeKit.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\UTC di hoc\ki6\lap-trinh-api-6-4-mien-thi\MISA.AMIS.KeToan.API\MISA.AMIS.KeToan.API\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll

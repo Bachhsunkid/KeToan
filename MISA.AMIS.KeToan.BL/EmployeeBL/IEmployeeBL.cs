@@ -33,5 +33,12 @@ namespace MISA.AMIS.KeToan.BL
         /// Created by: Txbach 13/02/2023
         /// <returns>New employeecode</returns>
         public string GetNewEmployeeCode();
+
+        /// <summary>
+        /// Gửi email đến nhiều nhân viên
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        public bool SendMail(EmailDTO request);
     }
 }

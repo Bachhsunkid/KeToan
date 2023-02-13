@@ -1,15 +1,21 @@
 ﻿using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using MISA.AMIS.KeToan.BL;
 using MISA.AMIS.KeToan.Common;
 using MISA.AMIS.KeToan.Common.Entities;
 using MISA.AMIS.KeToan.Common.Enum;
 using MISA.AMIS.KeToan.DL;
 using MySqlConnector;
-
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Net.Smtp;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace MISA.AMIS.KeToan.API.Controllers
 {
@@ -101,6 +107,33 @@ namespace MISA.AMIS.KeToan.API.Controllers
                     DevMsg = "Catch an exception",
                     UserMsg = "Có lỗi xảy ra, vui lòng liên hệ MISA",
                     MoreInfo = "https://openapi.misa.com.vn/errorcode/1",
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        [HttpPost("SendMail")]
+        public IActionResult SendMail([FromBody] EmailDTO request)
+        {
+            try
+            {
+                var isSent = _employeeBL.SendMail(request);
+
+                if (isSent)
+                {
+                    return StatusCode(StatusCodes.Status200OK);
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    ErrorCode = AMISKeToanErrorCode.Exception,
+                    DevMsg = Resource.DevMsg_Exception,
+                    UserMsg = Resource.UserMsg_Exception,
+                    MoreInfo = Resource.MoreInfor_Exception,
                     TraceId = HttpContext.TraceIdentifier
                 });
             }

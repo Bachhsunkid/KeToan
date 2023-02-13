@@ -1,10 +1,14 @@
-﻿using MISA.AMIS.KeToan.Common.Entities;
+﻿using MimeKit.Text;
+using MimeKit;
+using MISA.AMIS.KeToan.Common.Entities;
 using MISA.AMIS.KeToan.DL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
 
 namespace MISA.AMIS.KeToan.BL
 {
@@ -12,12 +16,15 @@ namespace MISA.AMIS.KeToan.BL
     {
         #region Field
         private IEmployeeDL _employeeDL;
+
+        private readonly IConfiguration _config;
         #endregion
 
         #region Constructor
-        public EmployeeBL(IEmployeeDL employeeDL) : base(employeeDL)
+        public EmployeeBL(IEmployeeDL employeeDL, IConfiguration config) : base(employeeDL)
         {
             _employeeDL = employeeDL;
+            _config = config;
         }
         #endregion
 
@@ -48,6 +55,37 @@ namespace MISA.AMIS.KeToan.BL
         public string GetNewEmployeeCode()
         {
             return _employeeDL.GetNewEmployeeCode();
+        }
+
+        /// <summary>
+        /// Gửi email đến nhiều nhân viên
+        /// </summary>
+        /// Created by: Txbach 13/02/2023
+        /// <returns>New employeecode</returns>
+        public bool SendMail(EmailDTO request)
+        {
+            try
+            {
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailAddress").Value));
+                foreach (var to in request.To)
+                {
+                    email.To.Add(MailboxAddress.Parse(to));
+                }
+                email.Subject = request.Subject;
+                email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
+
+                using var smtp = new SmtpClient();
+                smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+                smtp.Authenticate(_config.GetSection("EmailAddress").Value, _config.GetSection("EmailPassword").Value);
+                smtp.Send(email);
+                smtp.Dispose();
+                return true;
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
     }
 }
